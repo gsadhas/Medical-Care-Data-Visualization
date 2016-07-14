@@ -1,9 +1,0 @@
-Name : Anirudh Ramnath
-***************************
-Schdule and deliverables:
-
-- Menu and navbar design and implementation > 10/31 (2 hours)
-- Design main vitals page template > Mon 11/02 (2 hours)
-- Implement viz for 3 vitals (temperature, pulse, respiration) data gathering > Mon 11/02 (3 hours)
-- Read from backend (xls file) and display in page > Wed 11/04 (3 hours)
-- Integration with gowdhaman's work > Fri 11/06 (3 hours)
