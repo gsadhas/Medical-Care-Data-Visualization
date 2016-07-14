@@ -1,2 +1,2 @@
-# medicare-transitions
-Interface for medical care transitions (Dev stage)
+# Medical Care Data Visulization
+Interface for medical care data analysis and visualization.
