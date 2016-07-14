@@ -1,0 +1,9 @@
+Name : Gowdhaman Sadhasivam
+***************************
+Schdule and deliverables:
+
+- Pain score data encoding > Fri 10/31 (2 hours)
+- Pain score graph integration > Mon 11/02 (2 hours)
+- Three Vitals parameters (diastolic bp, systolic bp and pulse oximetry) data gathering > Mon 11/02 (3 hours)
+- Vitals parameters encoding > Wed 11/04 (3 hours)
+- Integrations of vitals encoding > Fri 11/06 (3 hours)

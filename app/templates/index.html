@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+{% include 'header.html' %}
+
+<div class="container">
+<div class="bodySystemsPopover">
+<button class="btn btn-warning" data-toggle="popover"><span class="glyphicon glyphicon-chevron-right" 
+style="font-size: 1.5em;"></span>
+</button>
+</div>
+<ol class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/bfilters">Body Systems</a></li>
+  <li class="active">Details</li>
+</ol>
+<br/>
+<div class="row" id="appTitle">
+<h2><strong>Interface for Medical Care Transitions</strong></h2>
+</div>
+  <div class="panel panel-default">
+  
+    <div class="panel-heading">
+      <h3 class="panel-title">Patient Admission Information</h3>
+    </div>
+    <div class="panel-body" style="position:relative">
+      <div class="panel panel-default">
+        <div class="panel-body text-center">
+		<div class="row">
+		<div class="col-lg-2">
+		<img class="pdtlsImage" src="{{ppath}}" alt="patient image"/>
+		</div>
+		<div class="col-lg-8">
+		<div class="row">
+		<div class="pdtlsText col-lg-3"><span class="text-primary">Name:</span> {{pname}}</div>
+          <div class="pdtlsText col-lg-3"><span class="text-primary">Age:</span> 35</div>
+          <div class="pdtlsText col-lg-3"><span class="text-primary">Gender:</span> Male</div>
+          <div class="pdtlsText col-lg-3"><span class="text-primary">Code Status:</span> WF</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="pdtlsText col-lg-6"><span class="text-primary">Illness Severity:</span> Watcher</div>
+			<div class="pdtlsText col-lg-6"><span class="text-primary">Allergies:</span> Peanuts, Seafood</div>
+		</div>
+		</div>
+		<div class="col-lg-2">
+				<div><span class="text-primary">MICU Day#:</span> 1</div>
+			<div><span class="text-primary">Vent Day #:</span> 2</div>
+			<div><span class="text-primary">Line Day #:</span> 3</div>
+		</div>
+		</div>
+       
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-body text-justified">
+          <div class="col-lg-12"><p class="text-primary">Patient Summary</p>
+          <p>
+            64 year old male admitted for respiratory failure.
+          </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+	      <a data-toggle="collapse" href="#problemList">Problem list</a>
+
+	  </h3>
+    </div>
+	<div id="problemList" class="panel-collapse in">
+    <div class="panel-body">
+      <p>
+        <ul>
+          <li>Respiratory failure</li>
+          <li>Acute kidney injury</li>
+        </ul>
+      </p>
+    </div>
+	</div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+	<h3 class="panel-title">
+      <a data-toggle="collapse" href="#vitalsList">Vitals</a>
+	  </h3>
+    </div>
+	<div id="vitalsList" class="panel-collapse in">
+    <div class="panel-body">
+	<div class="row">
+	<div class="col-lg-12">
+	
+	<div id="chkVitals">
+    <form method="post">
+        <fieldset>
+                <legend>Filter vitals</legend>
+
+        <div class="row">
+        <div class="col-lg-1">
+                        <label><input type="checkbox" name="vitals" value="pain" class="filterChkBox" checked="checked">&nbsp;Pain</label> </div>
+            <div class="col-lg-2">
+                        <label><input type="checkbox" name="vitals" value="bp" class="filterChkBox" checked="checked"/>&nbsp;Blood Pressure</label></div>
+            <div class="col-lg-2">
+                       <label> <input type="checkbox" name="vitals" value="temp" class="filterChkBox" checked="checked"/>&nbsp;Temperature</label></div>
+            <div class="col-lg-2">
+            <label><input type="checkbox" name="vitals" value="rr" class="filterChkBox" checked="checked"/>&nbsp;Respiration rate</label></div>
+            <div class="col-lg-1">
+            <label><input type="checkbox" name="vitals" value="pulse" class="filterChkBox" checked="checked"/>&nbsp;Pulse</label></div>
+            <div class="col-lg-2">
+            <label><input type="checkbox" name="vitals" value="pulseOx" class="filterChkBox" checked="checked"/>&nbsp;Pulse Oximetry</label></div>
+            <!--<div class="col-lg-2">
+                        <button type="submit" class="btn btn-primary btn-sm">&nbsp;Show</button></div>
+            </div>-->
+
+        </fieldset>
+  </form>
+  To view detailed information, place the pointer in respective position.
+  </div>
+      </div>
+	  <br/>
+	  </div>
+	  <br/>
+	  <div class="row">
+	  {% if '1' in vitals_list %}
+	  <div id="PSchart" class="col-lg-6">
+	  PAIN
+	  </div>
+	  {% endif %}
+	  {% if '2' in vitals_list %}
+	  
+	  <div id="BPchart">
+	  <div id="bpchart" class="col-lg-6">
+	  Blood Pressure 
+	  </div>
+    </div>
+	  {% endif %}
+    
+	
+	{% if '3' in vitals_list %}
+		<div id="TempChart" class="col-lg-6" >
+		<div id="tempchart" class="col-lg-6">
+			Temperature
+		</div>
+		</div>
+		{% endif %}
+		{% if '4' in vitals_list %}
+		<div id="RespChart" class="col-lg-6">
+		<div id="respchart" class="col-lg-6">
+			Respiration Rate
+		</div>
+		</div>
+		{% endif %}
+	
+	
+	
+	{% if '5' in vitals_list %}
+		<div id="PulseChart" class="col-lg-6" >
+		<div id="pulsechart" class="col-lg-6">
+			Pulse
+		</div>
+		</div>
+		{% endif %}
+		{% if '6' in vitals_list %}
+		<div id="PulseOxChart" class="col-lg-6">
+		<div id="poxchart" class="col-lg-6">
+			Pulse Oximetry
+		</div>
+		</div>
+		{% endif %}
+	</div>
+	
+	</div>
+	</div>
+  </div>
+
+  <hr/>
+  <div id="body-systems-wrapper">
+    <h2>Body Systems:</h2>
+	
+  {% if '1' in body_system %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#neurologicAccordian">Neurologic</a>
+        </h3>
+      </div>
+      <div id="neurologicAccordian" class="panel-collapse in">
+        <div class="panel-body row text-center">
+          <div class="col-lg-3">
+              <p class=""><strong>Physical Exam</strong></p>
+              <div class="text-justify">
+                <p>
+                  <ul>
+                    <li>Psych: Sedated</li>
+                    <li>Neuro: Alert-Awake</li>
+                    <li>Pupils: Reactive</li>
+                  </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Medication</strong></p>
+              <div class="text-justify">
+                <p>
+                <ul>
+                    <li>Lorazepam</li>
+                    <li>Fentanyl</li>
+                    <li>Propofol</li>
+                  </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Problems</strong></p>
+              <div class="text-justify">
+                <p>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Resident Plan</strong></p>
+              <div class="text-justify">
+                <p>
+                <div style="color:blue">
+                  {% if plan_results.get('neurologic')!= None %}
+                  {% for item in plan_results.get('neurologic') %}
+                  &#x2022; {{item}}<br/>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+                <textarea rows="10" cols="30" class="neurologicplan" placeholder="Enter plan here"></textarea>
+                <div>
+                <button class="btn btn-primary btn-xs neurologicUpdate">Update</button>
+                <span style='color:green' class='hide'><strong>Updated!</strong></span>
+                </div>
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if '2' in body_system %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#cardiovascularAccordian">Cardiovascular</a>
+          </h3>
+      </div>
+      <div id="cardiovascularAccordian" class="panel-collapse in">
+        <div class="panel-body row text-center">
+          <div class="col-lg-3">
+              <p class=""><strong>Physical Exam</strong></p>
+              <div class="text-justify">
+                <p>
+                <ul>
+                    <li>Rhythm: Regular</li>
+                    <li>Rate: Normal</li>
+                    <li>Murmurs: Yes</li>
+                  </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Medication</strong></p>
+              <div class="text-justify">
+                <p>
+                <ul>
+                    <li>Aminodarone 200mg</li>
+                    <li>ASA 325mg</li>
+                    <li>Lasix 20mg 9/20</li>
+                    <li>Metoprolol 12.5mg 9/2h</li>
+                </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Problems</strong></p>
+              <div class="text-justify">
+                <p>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Resident Plan</strong></p>
+              <div class="text-justify">
+                <p>
+                <div style="color:blue">
+                  {% if plan_results.get('cardiovascular')!= None %}
+                  {% for item in plan_results.get('cardiovascular') %}
+                  &#x2022; {{item}}<br/>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+                <textarea rows="10" cols="30" class="cardiovascularplan" placeholder="Enter plan here"></textarea>
+                <div>
+                <button class="btn btn-primary btn-xs cardiovascularUpdate">Update</button>
+                <span style='color:green' class='hide'><strong>Updated!</strong></span>
+                </div>
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% if '3' in body_system %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <a data-toggle="collapse" href="#pulmonaryAccordian">Pulmonary</a>
+        </h3>
+      </div>
+      <div id="pulmonaryAccordian" class="panel-collapse in ">
+        <div class="panel-body row text-center">
+          <div class="col-lg-3">
+              <p class=""><strong>Physical Exam</strong></p>
+              <div class="text-justify">
+                <p>
+                <ul>
+                    <li>COPD Exacerbation</li>
+                    <li>Hypercapnic Respiratory Failure</li>
+                </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Medication</strong></p>
+              <div class="text-justify">
+                <p>
+                <ul>
+                    <li>Ipratropium 9th</li>
+                    <li>Levalbuterol 9th</li>
+                </ul>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Problems</strong></p>
+              <div class="text-justify">
+                <p>
+                </p>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <p class=""><strong>Resident Plan</strong></p>
+              <div class="text-justify">
+                <p>
+                <div style="color:blue">
+                  {% if plan_results.get('pulmonary')!= None %}
+                  {% for item in plan_results.get('pulmonary') %}
+                  &#x2022; {{item}}<br/>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+                  <textarea rows="15" cols="30" class="pulmonaryplan" name="residentplan" placeholder="Enter plan here"></textarea>
+                  <div>
+                  <button class="btn btn-primary btn-xs pulmonaryUpdate">Update</button>
+                  <span style='color:green' class='hide'><strong>Updated!</strong></span>
+                  </div>
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="text-center">
+    <form method="POST" action="/createSummary" onsubmit="return showConfirm();">
+      <input type="submit" class='btn btn-primary' value="Create Summary" ></input>
+    </form>
+    </div>
+
+  </div>
+</div> <!-- /container -->
+
+
+<script src="/static/js/circularHeatChart.js"></script>
+<script src="/static/js/legend.js"></script>
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+<script type="text/javascript">
+  function showConfirm(){
+
+    confirm ("Summary is created. Please check Summary Created time.");
+    return true;
+}
+  </script>
+<script type="text/javascript">
+    function validate(){
+			 var checked = $("#frmFilter input:checked").length > 0;
+			if (!checked){
+				alert("Please check at least one checkbox");
+				return false;
+			}
+		}
+</script>
+
+<script>
+
+var patientData = "{{pname}}";
+
+/* Pain score with random data */
+
+var data = [];
+for(var i=0; i<72; i++) 
+{
+	if( i== 10)
+		data[i] = {title: "Segment "+i, value: 5};
+	else if (i == 20)
+		data[i] = {title: "Segment "+i, value: 2};
+	else
+		data[i] = {title: "Segment "+i, value: Math.round(Math.random()*5)};
+}
+
+var tooltip = d3.select("#PSchart")
+	.append("div")
+	.style("position", "relative")
+	.style("z-index", "10")
+	.style("height","10px")
+	.style("visibility", "hidden");
+	
+	
+var chart = circularHeatChart()
+    .innerRadius(20)
+    .range(["#f1eef6","#980043"])
+    .radialLabels(["Day 1", "Day 2", "Day 3"])
+    .segmentLabels(["Midnight", "1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am",
+    "11am", "Midday", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm"]);
+
+chart.accessor(function(d) {return d.value;})
+	
+d3.select('#PSchart')
+    .selectAll('svg')
+    .data([data])
+    .enter()
+    .append('svg')
+    .call(chart); 
+	
+d3.selectAll("#PSchart path")
+	.on('mouseover', function() {
+	d3.select(this)
+    .style("stroke","white")
+    .attr("stroke-width",3)
+    this.parentNode.appendChild(this);
+	
+    var d = d3.select(this).data()[0];
+	
+	return tooltip.style("visibility", "visible")
+					.text("Pain Score: "+d.value);
+	})
+	.on("mouseout", function(){
+	d3.select(this)
+    .style("stroke","none");
+	return tooltip.style("visibility", "hidden");
+	}); 
+	
+/* Pain score chart - End*/	
+
+	/* Blood pressure chart */
+
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 500 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
+	
+// Parse the date / time
+var parseDate = d3.time.format("%d-%b-%y %I:%M%p").parse;
+
+// Parse time for tooltip
+var formatTime = d3.time.format("%e %B %I:%M %p");
+
+// Define color scale
+var color = d3.scale.category10();
+
+
+// Set the ranges
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+// Define the line
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.Time); })
+    .y(function(d) { return y(d.DiastolicBP); });
+
+// Define second line
+var valueline2 = d3.svg.line()
+    .x(function(d) { return x(d.Time); })
+    .y(function(d) { return y(d.SystolicBP); });
+	
+// Adds the svg canvas
+var svg = d3.select("#bpchart")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+//Clinician Alert function
+var sbpFlag = 0;
+var dbpFlag = 0;
+d3.csv("../static/data/{{pname}}/vitals/data.csv", function(error, data) {
+
+data.forEach(function(d){
+      if( parseInt(d.DiastolicBP) < 30)
+        dbpFlag = 1;
+
+      if( parseInt(d.SystolicBP) > 120)
+        sbpFlag = 1;
+    });
+    
+});
+
+// Get the data
+d3.csv("../static/data/{{pname}}/vitals/data.csv", function(error, data) {
+
+
+    data.forEach(function(d) {
+        d.Time = parseDate(d.Time);
+        d.DiastolicBP = +d.DiastolicBP;
+		d.SystolicBP = +d.SystolicBP;
+
+		
+    });
+
+    // Scale the range of the data
+    x.domain([d3.time.hour.offset(d3.min(data, function(d) { return d.Time; }), -1), d3.time.hour.offset(d3.max(data, function(d) { return d.Time; }), +1)]);
+    y.domain([0, d3.max(data, function(d) { return Math.max(d.DiastolicBP, d.SystolicBP); })+70]);
+	
+
+    // Add the valueline path.
+    svg.append("path")
+        .attr("class", "line")
+		.style("stroke", "rgb(255,121,14)")
+		.style("stroke-width",1)
+		.style("fill","none")
+		.attr("d", valueline(data))
+		.attr("data-legend","DiastolicBP");
+		
+	// Add the valueline2 path
+    svg.append("path")
+        .attr("class", "line")
+		.style("stroke", "rgb(31,119,180)")
+		.style("stroke-width",1)	
+		.style("fill","none")		
+		.attr("d", valueline2(data))
+		.attr("data-legend","SystolicBP");
+		
+	//Add tooltip
+	var bptooltip = d3.select("#bpchart").append("div")     
+				.attr("class", "tooltip")               
+				.style("opacity", 0);	
+
+    // Add the scatterplot for DiastolicBP
+    svg.selectAll("dot")
+        .data(data)
+      .enter().append("circle")
+        .attr("r", 3)
+        .attr("cx", function(d) { return x(d.Time); })
+        .attr("cy", function(d) { return y(d.DiastolicBP); })
+		.style("fill", "rgb(255,121,14)")
+		.on("mouseover", function(d) {  
+		var xPos = x(d.Time);
+		var yPos = y(d.DiastolicBP);
+            bptooltip.transition()        
+                .duration(200)      
+                .style("opacity", .9);      
+            bptooltip.html(formatTime(d.Time) + "<br/>"+ "DIASTOLIC BP: "+d.DiastolicBP)  
+                .style("left", xPos + "px")     
+                .style("top", yPos-370 + "px");    				
+            })
+		.on("mouseout", function(d) {       
+            bptooltip.transition()        
+                .duration(3000)      
+                .style("opacity", 0);
+
+        });		
+		
+			
+    // Add the scatterplot for SystolicBP
+    svg.selectAll("dot")
+        .data(data)
+      .enter().append("circle")
+        .attr("r", 3)
+        .attr("cx", function(d) { return x(d.Time); })
+        .attr("cy", function(d) { return y(d.SystolicBP); })
+		.style("fill", "rgb(31,119,180)")
+		.on("mouseover", function(d) {  
+		var xPos = x(d.Time);
+		var yPos = y(d.SystolicBP);		
+            bptooltip.transition()        
+                .duration(200)      
+                .style("opacity", .9);      
+            bptooltip.html(formatTime(d.Time) + "<br/>"+ "SYSTOLIC BP: "+d.SystolicBP)  
+                .style("left", xPos + "px")     
+                .style("top", yPos-370 + "px");    							
+            })
+		.on("mouseout", function(d) {       
+			bptooltip.transition()        
+                .duration(500)      
+                .style("opacity", 0);   
+
+        });
+			
+
+    // Add the X Axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+	  .append("text")
+		.attr("class", "label")
+		.attr("x", width)
+		.attr("y", -6)
+		.style("text-anchor", "end")
+		.text("Time");
+
+    // Add the Y Axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("BP");	
+// Applying legend
+var legendRectSize = 18;
+var legendSpacing = 4;
+var legendData = ["SYSTOLIC BP","DIASTOLIC BP"]
+var legend = svg.selectAll('.legend')
+			  .data(legendData)
+			  .enter()
+			  .append('g')
+			  .attr('class', 'legend')
+			  .attr('transform', function(d, i) {
+				var height = legendRectSize + legendSpacing;
+				var offset =  height * 1;
+				var horz = legendRectSize + 10;
+				var vert = i * height - offset + 40;
+				return 'translate(' + horz + ',' + vert + ')';
+			  });
+  
+	  legend.append("circle")
+		.attr("r", 5)
+		.style("fill", color);
+	  
+	  legend.append('text')
+	  .attr('x', 15)
+	  .attr('y', 4)
+	  .text(function(d) { return d; });
+		  
+});
+
+/* Blood pressure chart - End*/
+
+/* ############################ */
+/* Temperature chart*/
+
+// Set the dimensions of the canvas / graph
+var marginT = {top: 30, right: 20, bottom: 30, left: 50},
+    widthT = 500 - marginT.left - marginT.right,
+    heightT = 350 - marginT.top - marginT.bottom;
+	
+// Parse the date / time
+var parseDateT = d3.time.format("%d-%b-%y %I:%M%p").parse;
+
+// Parse time for tooltip
+var formatTimeT = d3.time.format("%e %B %I:%M %p");
+
+// Define color scale
+var colorT = d3.scale.category10();
+
+
+// Set the ranges
+var xT = d3.time.scale().range([0, widthT]);
+var yT = d3.scale.linear().range([heightT, 0]);
+
+
+// Define the axes
+var xAxisT = d3.svg.axis().scale(xT)
+    .orient("bottom").ticks(5);
+
+var yAxisT = d3.svg.axis().scale(yT)
+    .orient("left").ticks(5);
+
+// Define the line
+var valuelineT = d3.svg.line()
+    .x(function(d) { return xT(d.Time); })
+    .y(function(d) { return yT(d.Temperature); });
+	
+// Adds the svg canvas
+var svgT = d3.select("#tempchart")
+    .append("svg")
+        .attr("width", widthT + marginT.left + marginT.right)
+        .attr("height", heightT + marginT.top + marginT.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + marginT.left + "," + marginT.top + ")");
+//Clinician Alert function
+var tempFlag = 0;
+d3.csv("../static/data/{{pname}}/vitals/temp.csv", function(error, data) {
+
+data.forEach(function(d){
+      if( parseInt(d.Temperature) > 40)
+        tempFlag = 1;
+      if( parseInt(d.Temperature) <= 30)
+        tempFlag = 1;
+    });
+
+});
+
+
+// Get the data
+d3.csv("../static/data/{{pname}}/vitals/temp.csv", function(error, dataT) {
+    dataT.forEach(function(d) {
+        d.Time = parseDateT(d.Time);
+        d.Temperature = +d.Temperature;
+	
+    });
+
+    // Scale the range of the data
+    xT.domain([d3.time.hour.offset(d3.min(dataT, function(d) { return d.Time; }), -1), d3.time.hour.offset(d3.max(dataT, function(d) { return d.Time; }), +1)]);
+    yT.domain([0, d3.max(dataT, function(d) { return d.Temperature; }) + 20]);
+	
+	//Add tooltip
+	var tooltipT = d3.select("#tempchart").append("div")     
+				.attr("class", "tooltip")               
+				.style("opacity", 0);		
+	
+
+    // Add the valueline path.
+   /* svgT.append("path")
+        .attr("class", "lineT")
+		.style("stroke", "#f9520c")
+		.style("stroke-width",1)
+		.style("fill","none")
+		.attr("d", valuelineT(dataT));	*/	
+
+    // Add the scatterplot for Temperature
+    svgT.selectAll("rect_temp")
+        .data(dataT)
+      .enter().append("rect")
+		.attr("x", function(d) { return xT(d.Time)-3.5; })
+        .attr("y", function(d) { return yT(d.Temperature)-3.5; })
+		.attr("height",7)
+		.attr("width",7)
+		.style("fill","#f9520c")
+		.on("mouseover", function(d) {  
+		var xPosT = xT(d.Time);
+		var yPosT = yT(d.Temperature);		
+            tooltipT.transition()        
+                .duration(200)      
+                .style("opacity", .9);      
+            tooltipT.html(formatTime(d.Time) + "<br/>"+ "Temperature: "+d.Temperature)  
+                .style("left", xPosT + "px")     
+                .style("top", yPosT-360 + "px");    							
+            })
+		.on("mouseout", function(d) {       
+			tooltipT.transition()        
+                .duration(500)      
+                .style("opacity", 0);   
+
+        });
+		
+	// Add the X Axis
+    svgT.append("g")
+        .attr("class", "x axis T")
+        .attr("transform", "translate(0," + heightT + ")")
+        .call(xAxisT)
+	  .append("text")
+		.attr("class", "label")
+		.attr("x", widthT)
+		.attr("y", -6)
+		.style("text-anchor", "end")
+		.text("Time");
+
+    // Add the Y Axis
+    svgT.append("g")
+        .attr("class", "y axis T")
+        .call(yAxisT)
+    .append("text")
+      .attr("class", "label")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", ".71em")
+      .style("text-anchor", "end")
+      .text("Temperature (C)");	
+
+// Applying legend
+var legendRectSize = 18;
+var legendSpacing = 4;
+var legendData = ["Temperature"]
+var legend = svgT.selectAll('.legend')
+			  .data(legendData)
+			  .enter()
+			  .append('g')
+			  .attr('class', 'legend')
+			  .attr('transform', function(d, i) {
+				var height = legendRectSize + legendSpacing;
+				var offset =  height * 1;
+				var horz = legendRectSize + 10;
+				var vert = i * height - offset + 40;
+				return 'translate(' + horz + ',' + vert + ')';
+			  });
+  
+	  legend.append("rect")
+		.attr("height",7)
+		.attr("width",7)
+		.style("fill","#f9520c");
+	  
+	  legend.append('text')
+	  .attr('x', 15)
+	  .attr('y', 4)
+	  .text(function(d) { return d; });	  
+		  
+});
+
+/* Temperature chart end*/
+/*#################################*/
+/* Respiration chart*/
+
+// Set the dimensions of the canvas / graph
+var marginR = {top: 30, right: 20, bottom: 30, left: 50},
+    widthR = 500 - marginR.left - marginR.right,
+    heightR = 350 - marginR.top - marginR.bottom;
+
+// Parse the date / time
+var parseDateR = d3.time.format("%d-%b-%y %I:%M%p").parse;
+
+// Set the ranges
+var xR = d3.time.scale().range([0, widthR]);
+var yR = d3.scale.linear().range([heightR, 0]);
+
+// Define the axes
+var xAxisR = d3.svg.axis().scale(xR)
+    .orient("bottom").ticks(5);
+var yAxisR = d3.svg.axis().scale(yR)
+    .orient("left").ticks(5);
+	
+// Define the line
+var valuelineR = d3.svg.line()
+    .x(function(d) { return xR(d.Time); })
+    .y(function(d) { return yR(d.RespRate); });
+	
+// Adds the svg canvas
+var svgR = d3.select("#respchart")
+    .append("svg")
+        .attr("width", widthR + marginR.left + marginR.right)
+        .attr("height", heightR + marginR.top + marginR.bottom)
+    .append("g")
+        .attr("transform","translate(" + marginR.left + "," + marginR.top + ")");
+
+//Clinician Alert function
+var repFlag = 0;
+d3.csv("../static/data/{{pname}}/vitals/respRate.csv", function(error, data) {
+
+data.forEach(function(d){
+      if( parseInt(d.RespRate) > 30)
+        repFlag = 1;
+      if( parseInt(d.RespRate) <= 19)
+        repFlag = 1;
+    });
+    
+});
+
+// Get the data
+d3.csv("../static/data/{{pname}}/vitals/respRate.csv", function(error, dataR) {
+    dataR.forEach(function(d) {
+        d.Time = parseDateR(d.Time);
+        d.RespRate = +d.RespRate;
+    });
+// Scale the range of the data
+xR.domain([d3.time.hour.offset(d3.min(dataR, function(d) { return d.Time; }), -1), d3.time.hour.offset(d3.max(dataR, function(d) { return d.Time; }), +1)]);
+yR.domain([0, d3.max(dataR, function(d) { return d.RespRate; })+5]);
+			
+// Add the valueline path.
+svgR.append("path")
+	.attr("class", "lineR")
+	.style("stroke", "#f9520c")
+	.style("stroke-width",1)
+	.style("fill","none")
+	.attr("d", valuelineR(dataR));	
+		
+// Add the X Axis
+svgR.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + heightR + ")")
+	.call(xAxisR)
+  .append("text")
+	.attr("class", "label")
+	.attr("x", widthR)
+	.attr("y", -6)
+	.style("text-anchor", "end")
+	.text("Time");
+
+// Add the Y Axis
+svgR.append("g")
+	.attr("class", "y axis")
+	.call(yAxisR)
+.append("text")
+  .attr("class", "label")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end")
+  .text("Respiration rate");
+  
+});  
+/* Respiration chart end */
+/* ################################# */
+/* Pulse chart */
+// Set the dimensions of the canvas / graph
+var marginP = {top: 30, right: 20, bottom: 30, left: 50},
+    widthP = 500 - marginP.left - marginP.right,
+    heightP = 350 - marginP.top - marginP.bottom;
+// Parse the date / time
+var parseDateP = d3.time.format("%d-%b-%y %I:%M%p").parse;
+
+
+// Set the ranges
+var xP = d3.time.scale().range([0, widthP]);
+var yP = d3.scale.linear().range([heightP, 0]);
+// Define the axes
+var xAxisP = d3.svg.axis().scale(xP)
+    .orient("bottom").ticks(5);
+var yAxisP = d3.svg.axis().scale(yP)
+    .orient("left").ticks(5);
+
+// Define valueline
+var valuelineP = d3.svg.line()
+    .x(function(d) { return xP(d.Time); })
+    .y(function(d) { return yP(d.PulseRate); });
+
+// Adds the svg canvas
+var svgP = d3.select("#pulsechart")
+    .append("svg")
+        .attr("width", widthP + marginP.left + marginP.right)
+        .attr("height", heightP + marginP.top + marginP.bottom)
+    .append("g")
+        .attr("transform","translate(" + marginP.left + "," + marginP.top + ")");
+//Clinician Alert function
+var pulseFlag = 0;
+d3.csv("../static/data/{{pname}}/vitals/pulse.csv", function(error, data) {
+
+data.forEach(function(d){
+      if( parseInt(d.PulseRate) > 81)
+        pulseFlag = 1;
+      if( parseInt(d.PulseRate) <= 71)
+        pulseFlag = 1;
+    });
+    
+});
+
+
+// Get the data
+d3.csv("../static/data/{{pname}}/vitals/pulse.csv", function(error, dataP) {
+	if (error) throw error;
+    dataP.forEach(function(d) {
+        d.Time = parseDateP(d.Time);
+        d.PulseRate = +d.PulseRate;
+    });
+	
+ // Sort the data or bisect() won't work right
+      dataP.sort(function(a, b) {return a.Time - b.Time;});	
+// Scale the range of the data
+//xP.domain([d3.time.hour.offset(d3.min(dataP, function(d) { return d.Time; }), -1), d3.time.hour.offset(d3.max(dataP, function(d) { return d.Time; }), +1)]);
+xP.domain([d3.min(dataP, function(d) { return d.Time; }), d3.max(dataP, function(d) { return d.Time; })]);
+yP.domain([0, d3.max(dataP, function(d) { return d.PulseRate; })+20]);
+			
+// Add the valueline path.
+svgP.append("path")
+  .attr("class", "lineO")
+  .style("stroke", "#c0c225")
+  .style("stroke-width",1)
+  .style("fill","none")
+  .attr("d", valuelineP(dataP));  
+
+// Add the X Axis
+svgP.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + heightP + ")")
+	.call(xAxisP)
+  .append("text")
+	.attr("class", "label")
+	.attr("x", widthP)
+	.attr("y", -6)
+	.style("text-anchor", "end")
+	.text("Time");
+
+// Add the Y Axis
+svgP.append("g")
+	.attr("class", "y axis")
+	.call(yAxisP)
+.append("text")
+  .attr("class", "label")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end")
+  .text("Pulse rate");
+  
+		
+});  
+
+/* Pulse chart end */
+/* ################################# */
+/* Pulse Oximetry chart*/
+// Set the dimensions of the canvas / graph
+var marginO = {top: 30, right: 20, bottom: 30, left: 50},
+    widthO = 500 - marginO.left - marginO.right,
+    heightO = 350 - marginO.top - marginO.bottom;
+// Parse the date / time
+var parseDateO = d3.time.format("%d-%b-%y %I:%M%p").parse;
+
+// Set the ranges
+var xO = d3.time.scale().range([0, widthO]);
+var yO = d3.scale.linear().range([heightO, 0]);
+// Define the axes
+var xAxisO = d3.svg.axis().scale(xO)
+    .orient("bottom").ticks(5);
+var yAxisO = d3.svg.axis().scale(yO)
+    .orient("left").ticks(5);
+	
+// Define the line
+var valuelineO = d3.svg.line()
+    .x(function(d) { return xO(d.Time); })
+    .y(function(d) { return yO(d.PulseOx); });
+// Adds the svg canvas
+var svgO = d3.select("#poxchart")
+    .append("svg")
+        .attr("width", widthO + marginO.left + marginO.right)
+        .attr("height", heightO + marginO.top + marginO.bottom)
+    .append("g")
+        .attr("transform","translate(" + marginO.left + "," + marginO.top + ")");
+
+//Clinician Alert function
+var poxFlag = 0;
+var alerMessage = [];
+d3.csv("../static/data/{{pname}}/vitals/pulseox.csv", function(error, data) {
+
+data.forEach(function(d){
+      if( parseInt(d.PulseOx) > 85)
+        poxFlag = 1;
+      if( parseInt(d.PulseOx) <= 70)
+        poxFlag = 1;
+    });
+
+    if (sbpFlag == 1) 
+      alerMessage.push("SystolicBP");
+    if (dbpFlag == 1)
+      alerMessage.push("DiastolicBP");
+    if (tempFlag == 1)
+      alerMessage.push("Temperature");
+    if (repFlag == 1)
+      alerMessage.push("Respiration");
+    if (pulseFlag == 1)
+      alerMessage.push("Pulse");
+    if (poxFlag == 1)
+      alerMessage.push("Pulse Oximetry");
+
+    alert("Need attention on below Vitals :" + "\n"+alerMessage);
+});
+
+
+// Get the data
+d3.csv("../static/data/{{pname}}/vitals/pulseox.csv", function(error, dataO) {
+    dataO.forEach(function(d) {
+        d.Time = parseDateO(d.Time);
+        d.PulseOx = +d.PulseOx;
+    });
+// Scale the range of the data
+xO.domain([d3.time.hour.offset(d3.min(dataO, function(d) { return d.Time; }), -1), d3.time.hour.offset(d3.max(dataO, function(d) { return d.Time; }), +1)]);
+yO.domain([0, 100]);
+			
+// Add the valueline path.
+svgO.append("path")
+	.attr("class", "lineO")
+	.style("stroke", "#e9d500")
+	.style("stroke-width",1)
+	.style("fill","none")
+	.attr("d", valuelineO(dataO));	
+		
+// Add the X Axis
+svgO.append("g")
+	.attr("class", "x axis")
+	.attr("transform", "translate(0," + heightO + ")")
+	.call(xAxisO)
+  .append("text")
+	.attr("class", "label")
+	.attr("x", widthO)
+	.attr("y", -6)
+	.style("text-anchor", "end")
+	.text("Time");
+
+// Add the Y Axis
+svgO.append("g")
+	.attr("class", "y axis")
+	.call(yAxisO)
+.append("text")
+  .attr("class", "label")
+  .attr("transform", "rotate(-90)")
+  .attr("y", 6)
+  .attr("dy", ".71em")
+  .style("text-anchor", "end")
+  .text("Pulse Oximetry %");
+  
+});  
+
+/* Pulse Oximetry chart end */
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#home").removeClass("active");
+    $("#bsv").removeClass("active");
+	$("#asis").addClass("active");
+	
+});
+</script>
+{% include 'footer.html' %}
+

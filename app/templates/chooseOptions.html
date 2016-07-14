@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+{% include 'header.html' %}
+
+<div class="container">
+
+<div class="row" id="appTitle">
+<h2><strong>Interface for Medical Care Transitions</strong></h2>
+</div>
+    <h3> Selected Patients</h3>
+    <hr/>
+	<div class="row" style="text-align:center;">
+	{% for image in patient_image %}
+	
+		<img src="{{image}}" class="spatientThumb"/>
+		
+		
+	{% endfor %}
+	</div>
+    <div class="row">
+        <form class="form-horizontal" method="POST" action="/showVitals">
+        <fieldset>
+
+        <!-- Form Name -->
+        <legend>Select Filters</legend>
+
+        <!-- Multiple Checkboxes -->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="checkboxes">Body Systems</label>
+          <div class="col-md-4">
+          <div class="checkbox">
+            <label for="checkboxes-0">
+              <input type="checkbox" name="bodySystem" id="checkboxes-0" value="1">
+              Neurologic
+            </label>
+            </div>
+          <div class="checkbox">
+            <label for="checkboxes-1">
+              <input type="checkbox" name="bodySystem" id="checkboxes-1" value="2">
+              Cardiovascular
+            </label>
+            </div>
+            <div class="checkbox">
+              <label for="checkboxes-2">
+                <input type="checkbox" name="bodySystem" id="checkboxes-2" value="3">
+                Pulmonary
+              </label>
+            </div>
+            <br/>
+            <div>
+			<button id="bckbutton" name="bckbutton" class="btn btn-lg btn-primary" onclick="history.go(-1);return false;">Back</button> &nbsp;
+              <button id="singlebutton" name="singlebutton" class="btn btn-lg btn-primary">Go</button>
+          </div>
+          </div>
+        </div>
+
+        </fieldset>
+		<input id="vitalsLow" type="hidden" name="vitals" value="0" />
+        </form>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#home").removeClass("active");
+    $("#bsv").addClass("active");
+
+    $('#singlebutton').click(function(){
+      if ($("form").find("input:checked").length == 0) {
+        alert("Please select at least one body system");
+        return false;
+      }
+    });
+});
+</script>
+
+{% include 'footer.html' %}
